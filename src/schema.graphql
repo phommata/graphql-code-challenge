@@ -1,0 +1,7 @@
+type Query {
+  example(query: String): [Example!]!
+}
+
+type Example {
+  example: String
+}
