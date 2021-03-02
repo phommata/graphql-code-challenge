@@ -1,24 +1,19 @@
 # Astronomer Code Challenges
 
-This challenge tests capabilities of using GraphQL do develop an API.
+This challenge tests capabilities of using GraphQL to develop an API.
 
-# Astronomer GraphQL Code Challenge
+## Getting Started
 
 Start your GraphQL server to make sure everything is working in your local environment.
 
-## System Requirements:
+### System Requirements:
 
-<<<<<<< HEAD
 - [NPM & Node](https://nodejs.org/en/download/)
-=======
->>>>>>> parent of 2098dc9... Update README.me
 
-**Please run all using the latest node version**
+> 💡 Note: Please run all using the latest node version**
 
-- NPM & Node
-- Yarn
+### Installation + Local Dev:
 
-<<<<<<< HEAD
 1. `$ npm install`
 2. `$ npm start`
 
@@ -77,18 +72,11 @@ mutation {
 }
 ```
 
-=======
-## Installation + Local Dev:
-
-1. Run `yarn install`
-2. Run `yarn start`
-
-API is available @ `http://localhost:4000`
->>>>>>> parent of 2098dc9... Update README.me
 ## Logistics
 
 1. Fork this repository.
-2. When completed, email your recruiter a link to your repository.
+2. Get the challenge details from your recruiter.
+3. When completed, email your recruiter a link to your repository.
 
 Please make a private forked repository, and work with your recruiter to add the correct team member as a collaborator, so they can review the challenge. <br />
 
