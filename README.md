@@ -9,69 +9,16 @@ Start your GraphQL server to make sure everything is working in your local envir
 ### System Requirements:
 
 - [NPM & Node](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 > 💡 Note: Please run all using the latest node version**
 
 ### Installation + Local Dev:
 
-1. `$ npm install`
-2. `$ npm start`
+1. `$ yarn install`
+2. `$ yarn start`
 
 GraphQL Playground is available @ `http://localhost:4000`
-
-#### Example Queries
-
-Here are some examples to get you started. Feel free to play around with them and get creative.
-
-##### Get all deployed applications
-
-```graphql
-query {
-  deployedApplications {
-    id
-    name
-    description
-    applicationUrl
-  }
-}
-```
-
-##### Add a new deployed application
-
-```graphql
-mutation {
-  addDeployedApplication(name: "That is so shway!", description: "Nora West-Allen") {
-    id
-  }
-}
-```
-
-##### Update a deployed application
-
-```graphql
-mutation {
-  editDeployedApplication(id: "4ef19b4b-0348-45a5-9a9f-6f68ca9a62e6", name: "XS") {
-    name
-    description
-    applicationUrl
-    status
-  }
-}
-```
-
-##### Delete a deployed application
-
-```graphql
-mutation {
-  deleteDeployedApplication(id: "4ef19b4b-0348-45a5-9a9f-6f68ca9a62e6") {
-    name
-    description
-    applicationUrl
-    status
-  }
-}
-```
-
 ## Logistics
 
 1. Fork this repository.

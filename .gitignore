@@ -98,6 +98,3 @@ build
 
 # Cypress test-generated screenshots
 cypress/screenshots/
-
-# IDEA
-.idea/
