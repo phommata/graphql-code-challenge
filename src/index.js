@@ -1,23 +1,77 @@
-import { GraphQLServer } from 'graphql-yoga';
-import db from './db';
-import Query from './resolvers/Query';
+const { ApolloServer, gql } = require('apollo-server');
+const uuid = require('uuid/v4');
 
-/*
-* This demo is built using graphql-yoga
-* https://github.com/prisma-labs/graphql-yoga
-*/
+const typeDefs = gql`
+  type DeployedApplication {
+    id: ID!
+    name: String!
+    description: String!
+    applicationUrl: String!
+    status: String
+  }
 
-const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
-  resolvers: { Query },
-  context: { db }
-});
+  type Query {
+    deployedApplications: [DeployedApplication]
+  }
 
-/*
-* Access the GraphQL playground:
-* http://localhost:4000
-*/
+  type Mutation {
+    addDeployedApplication(name: String!, description: String!, applicationUrl: String! ): DeployedApplication
+    editDeployedApplication(id: ID!, name: String, description: String, applicationUrl: String): DeployedApplication
+    deleteDeployedApplication(id: ID!): DeployedApplication
+  }
+`;
 
-server.start(() => {
-  console.log('Server is running on http://localhost:4000');
+const deployedApplications = {};
+const addDeployedApplication = deployedApplication => {
+    const id = uuid();
+    return deployedApplications[id] = { ...deployedApplication, status: 'active', id };
+};
+
+addDeployedApplication({ name: "Lorem ipsum.", description: "Wash" , applicationUrl: "www.wash.com" });
+addDeployedApplication({ name: "Big bad wolf.", description: "The Doctor" , applicationUrl: "www.doctor.com" });
+addDeployedApplication({ name: "Woah!", description: "Neo" , applicationUrl: "www.woah.com" });
+
+const resolvers = {
+    Query: {
+        deployedApplications: () => Object.values(deployedApplications),
+    },
+    Mutation: {
+        addDeployedApplication: async (parent, deployedApplication) => {
+
+            return addDeployedApplication(deployedApplication);
+        },
+        editDeployedApplication: async (parent, { id, ...deployedApplication }) => {
+
+            if (!deployedApplications[id]) {
+                throw new Error("Deployed application doesn't exist");
+            }
+
+            deployedApplications[id] = {
+                ...deployedApplications[id],
+                ...deployedApplication,
+            };
+
+            return deployedApplications[id];
+        },
+        deleteDeployedApplication: async (parent, { id, ...deployedApplication }) => {
+
+            if (!deployedApplications[id]) {
+                throw new Error("Deployed application doesn't exist");
+            }
+
+
+            deployedApplications[id] = {
+                ...deployedApplications[id],
+                ...deployedApplication,
+                status: 'archived'
+            };
+
+            return deployedApplications[id];
+        },
+    },
+};
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`); // eslint-disable-line no-console
 });
